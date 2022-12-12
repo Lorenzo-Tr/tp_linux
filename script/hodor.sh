@@ -14,5 +14,6 @@ if [ $percent_inode_use -gt 3 ]; then
     for pts in /dev/pts/*; do
         echo "HODOOOR !!!" > $pts   
     done 
-    tar -zcvf $(mktemp -q XXXXXX.tar.gz) /var/log/exercice/recent_logs/ 
+    tar -zcvf $(mktemp -q /var/log/exercice/archives/XXXXXX.tar.gz) /var/log/exercice/recent_logs/ 
+	rm -rf /var/log/exercice/recent_logs
 fi

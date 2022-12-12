@@ -4,13 +4,19 @@
 
 if [ ! $USER = root ]; then
     echo "You need to be root"
+	exit
+fi
+
+if [ $# == 0 ]; then
+	echo "You had to enter the max inode percentage"
+	exit
 fi
 
 percent_inode_use=$(df -i /dev/sda3 | tail -n 1 | awk '{print substr($5, 1, length($5)-1)}')
 
 mkdir -p /var/log/exercice/archives
 
-if [ $percent_inode_use -gt 3 ]; then
+if [ $percent_inode_use -gt $1 ]; then
     for pts in /dev/pts/*; do
         echo "HODOOOR !!!" > $pts   
     done 

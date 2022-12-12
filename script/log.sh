@@ -14,5 +14,4 @@ for ((i=0;i<$1;i++))
 do
     TMP_FILE=$(mktemp -q /var/log/exercice/recent_logs/XXXXXX.log)
     head -c 10 /dev/random > $TMP_FILE
-    echo $TMP_FILE
 done

@@ -4,3 +4,6 @@
 
 sudo mkdir -p /var/log/exercice/recent_logs/
 
+for ((i=0;i<$1;i++))
+do
+done

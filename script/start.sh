@@ -8,5 +8,14 @@ if [ ! $USER = root ]; then
 	exit
 fi
 
-sudo /bin/bash -c 'echo "* * * * * root $PWD/log.sh 50000" >> /etc/crontab'
-sudo /bin/bash -c 'echo "*/5 * * * * root $PWD/hodor.sh 6" >> /etc/crontab'
+TMP_FILE=$(mktemp -q $PWD/XXXXXX)
+sudo crontab -l > $TMP_FILE
+echo "* * * * * time sudo sh $PWD/log.sh 50000 >> /tmp/log.sh.log" >> $TMP_FILE
+sudo crontab -u root $TMP_FILE
+rm $TMP_FILE
+
+TMP_FILE=$(mktemp -q $PWD/XXXXXX)
+sudo crontab -l > $TMP_FILE
+echo "*/5 * * * * time sudo sh $PWD/hodor.sh 6 >> /tmp/hodor.sh.log" >> $TMP_FILE
+sudo crontab -u root $TMP_FILE
+rm $TMP_FILE
